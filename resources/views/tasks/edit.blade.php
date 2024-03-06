@@ -45,7 +45,7 @@
 
 
                         <label for="assigned_to">Asignar a:</label><br>
-                        <select id="assigned_to" name="assigned_to" required>
+                        <select id="assigned_to" name="user_id" required>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}" {{ $task->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                             @endforeach
