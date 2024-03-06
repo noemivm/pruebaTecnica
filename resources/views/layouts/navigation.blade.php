@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                        {{ __('Tasks') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('tasks.show')" :active="request()->routeIs('tasks.show')">
+                        {{ __('Show') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -70,6 +78,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                {{ __('Tasks') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('tasks.show')" :active="request()->routeIs('tasks.show')">
+                {{ __('Show') }}
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
