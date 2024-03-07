@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -33,11 +34,15 @@ class TaskController extends Controller
              'user_id' => 'required|exists:users,id'
          ]);*/
 
-
         $taskData = $request->all();
+
+        if (strcasecmp($request->status, "Terminada") === 0) {
+            $taskData['finished_at'] = Carbon::now();//hora y fecha actual al tener estado terminado
+        }
+
         $taskData['user_id'] = $request->input('assigned_to'); // Asignar la tarea al usuario seleccionado
         Task::create($taskData);
-        return redirect()->route('tasks.index')->with('success', 'Tarea creada exitosamente.');
+        return redirect()->route('tasks.show')->with('success', 'Tarea creada exitosamente.');
 
     }
 
@@ -56,15 +61,19 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+
+
         /*$request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|in:Pendiente,En proceso,Terminada',
             'user_id' => 'required|exists:users,id'
         ]);*/
+        if (strcasecmp($request->status, "Terminada") === 0) {
+            $task->finished_at = Carbon::now();//hora y fecha actual al tener estado terminado
+        }
 
         $task->update($request->all());
-
         return redirect()->route('tasks.show')->with('success', 'Tarea actualizada exitosamente.');
     }
 

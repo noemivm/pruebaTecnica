@@ -18,6 +18,8 @@
                     <th class="px-6 py-3 text-left">Descripción</th>
                     <th class="px-6 py-3 text-left">Estado</th>
                     <th class="px-6 py-3 text-left">Asignado a</th>
+                    <th class="px-6 py-3 text-left">Creación</th>
+                    <th class="px-6 py-3 text-left">Finalización</th>
                     <th class="px-6 py-3 text-left">Acciones</th>
                 </tr>
             </thead>
@@ -28,6 +30,8 @@
                     <td class="px-6 py-4">{{ $task->description }}</td>
                     <td class="px-6 py-4">{{ $task->status }}</td>
                     <td class="px-6 py-4">{{ $task->user->name }}</td>
+                    <td class="px-6 py-4">{{ $task->created_at }}</td>
+                    <td class="px-6 py-4">{{ $task->finished_at }}</td>
 
                     <td class="px-6 py-4">
                         <a href="{{ route('tasks.edit', $task->id) }}"

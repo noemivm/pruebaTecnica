@@ -16,6 +16,7 @@ class Task extends Model
         'description',
         'status',
         'user_id',
+        'finished_at'
     ];
 
     //una tarea pertenece a un usuario
