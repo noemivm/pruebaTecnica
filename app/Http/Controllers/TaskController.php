@@ -11,13 +11,13 @@ class TaskController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('tasks.index', ['users' => $users]);  
-        
+        return view('tasks.index', ['users' => $users]);
+
     }
 
     public function create()
     {
-        $users = User::all(); 
+        $users = User::all();
         return view('tasks.create', compact('users'));
     }
 
@@ -26,12 +26,12 @@ class TaskController extends Controller
 
         //dd($request->all());
 
-       /*$request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'required|in:Pendiente,En proceso,Terminada',
-            'user_id' => 'required|exists:users,id'
-        ]);*/
+        /*$request->validate([
+             'title' => 'required|string|max:255',
+             'description' => 'nullable|string',
+             'status' => 'required|in:Pendiente,En proceso,Terminada',
+             'user_id' => 'required|exists:users,id'
+         ]);*/
 
 
         $taskData = $request->all();
@@ -41,12 +41,17 @@ class TaskController extends Controller
 
     }
 
-    public function edit(Task $task)    
+    public function edit(Task $task)
     {
-        $users = User::all(); 
+
+        // Obtener todas las opciones del enum del modelo Task
+        $statusOptions = Task::getStatusOptions();
+
+        $users = User::all();
         //$tasks = Task::all();
-        $status = Task::pluck('status')->unique();//agrupar por unico estado
-        return view('tasks.edit', ['users' => $users, 'task' => $task, 'status' => $status]); 
+        //$status = Task::pluck('status')->unique();//agrupar por unico estado
+        //return view('tasks.edit', ['users' => $users, 'task' => $task, 'status' => $status]);
+        return view('tasks.edit', ['users' => $users, 'task' => $task, 'statusOptions' => $statusOptions,]);
     }
 
     public function update(Request $request, Task $task)
@@ -60,12 +65,13 @@ class TaskController extends Controller
 
         $task->update($request->all());
 
-        return redirect()->route('tasks.index')->with('success', 'Tarea actualizada exitosamente.');
+        return redirect()->route('tasks.show')->with('success', 'Tarea actualizada exitosamente.');
     }
 
 
-    public function show() {
-        
+    public function show()
+    {
+
         $tasks = Task::with('user')->get();
         return view('tasks.show', ['tasks' => $tasks]);
 

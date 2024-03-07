@@ -33,9 +33,9 @@
                         <label for="status">Estado:</label><br>
                         
                         <select id="status" name="status" required>
-                        @foreach($status as $statu)
-                                <option value="{{ $statu }}" {{ $task->status == $statu ? 'selected' : '' }}>{{ $statu }}</option>
-                         @endforeach
+                        @foreach($statusOptions as $optionValue => $optionLabel) <!-- $optionValue coge los valores del enum,  $optionLabel coge los valores asociados a cada valor enum -->
+                            <option value="{{ $optionValue }}" {{ $task->status == $optionValue ? 'selected' : '' }}>{{ $optionLabel }}</option>
+                        @endforeach
                         </select><br>
 
                         <!-- VALIDACION-->

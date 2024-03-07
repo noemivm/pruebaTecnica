@@ -23,4 +23,16 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //funcion para tener las opciones del campo Status que es un Enum
+    public static function getStatusOptions()
+    {
+
+        return [
+            'Pendiente' => 'Pendiente',
+            'En proceso' => 'En proceso',
+            'Terminada' => 'Terminada'
+        ];
+
+    }
 }
